@@ -1,0 +1,98 @@
+{
+  "info": {
+    "name": "RoomBooking.Api",
+    "_postman_id": "9f8b6a1a-6c2a-4f6b-9e87-6d4d4d0bbf01",
+    "description": "Room endpoints for RoomBooking.Api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get all rooms",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5271/api/rooms",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5271",
+          "path": ["api", "rooms"]
+        }
+      }
+    },
+    {
+      "name": "Create room",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"roomNumber\": \"R301\",\n  \"name\": \"Test Room\",\n  \"capacity\": 15,\n  \"isAvailable\": true\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5271/api/rooms",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5271",
+          "path": ["api", "rooms"]
+        }
+      }
+    },
+    {
+      "name": "Get room by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5271/api/rooms/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5271",
+          "path": ["api", "rooms", "1"]
+        }
+      }
+    },
+    {
+      "name": "Update room",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"roomNumber\": \"R301\",\n  \"name\": \"Updated Room\",\n  \"capacity\": 20,\n  \"isAvailable\": true\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5271/api/rooms/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5271",
+          "path": ["api", "rooms", "1"]
+        }
+      }
+    },
+    {
+      "name": "Delete room",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5271/api/rooms/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5271",
+          "path": ["api", "rooms", "1"]
+        }
+      }
+    }
+  ]
+}
