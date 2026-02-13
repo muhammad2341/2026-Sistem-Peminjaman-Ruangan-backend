@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RoomBooking.Api.Data;
@@ -19,6 +20,7 @@ namespace RoomBooking.Api.Controllers
 
         // GET: api/Rooms
         [HttpGet]
+        [Authorize(Policy = "BorrowerOrAdmin")]
         public async Task<ActionResult<IEnumerable<RoomDto>>> GetRooms(
             [FromQuery] string? search = null,
             [FromQuery] int page = 1,
@@ -63,6 +65,7 @@ namespace RoomBooking.Api.Controllers
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
+        [Authorize(Policy = "BorrowerOrAdmin")]
         public async Task<ActionResult<RoomDto>> GetRoom(int id)
         {
             var room = await _context.Rooms.FindAsync(id);
@@ -88,6 +91,7 @@ namespace RoomBooking.Api.Controllers
 
         // POST: api/Rooms
         [HttpPost]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<ActionResult<RoomDto>> CreateRoom(CreateRoomDto createRoomDto)
         {
             if (!ModelState.IsValid)
@@ -133,6 +137,7 @@ namespace RoomBooking.Api.Controllers
 
         // PUT: api/Rooms/5
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateRoom(int id, UpdateRoomDto updateRoomDto)
         {
             if (!ModelState.IsValid)
@@ -170,6 +175,7 @@ namespace RoomBooking.Api.Controllers
 
         // DELETE: api/Rooms/5
         [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
             var room = await _context.Rooms.FindAsync(id);
