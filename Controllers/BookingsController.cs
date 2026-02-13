@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RoomBooking.Api.Data;
@@ -19,6 +20,7 @@ namespace RoomBooking.Api.Controllers
 
 		// GET: api/Bookings
 		[HttpGet]
+		[Authorize(Policy = "BorrowerOrAdmin")]
 		public async Task<ActionResult<IEnumerable<BookingDto>>> GetBookings(
 			[FromQuery] string? search = null,
 			[FromQuery] BookingStatus? status = null,
@@ -84,6 +86,7 @@ namespace RoomBooking.Api.Controllers
 
 		// GET: api/Bookings/5
 		[HttpGet("{id}")]
+		[Authorize(Policy = "BorrowerOrAdmin")]
 		public async Task<ActionResult<BookingDto>> GetBooking(int id)
 		{
 			var booking = await _context.Bookings
@@ -117,6 +120,7 @@ namespace RoomBooking.Api.Controllers
 
 		// POST: api/Bookings
 		[HttpPost]
+		[Authorize(Policy = "BorrowerOrAdmin")]
 		public async Task<ActionResult<BookingDto>> CreateBooking(CreateBookingDto createBookingDto)
 		{
 			if (!ModelState.IsValid)
@@ -201,6 +205,7 @@ namespace RoomBooking.Api.Controllers
 
 		// PUT: api/Bookings/5
 		[HttpPut("{id}")]
+		[Authorize(Policy = "AdminOnly")]
 		public async Task<IActionResult> UpdateBooking(int id, UpdateBookingDto updateBookingDto)
 		{
 			if (!ModelState.IsValid)
@@ -262,6 +267,7 @@ namespace RoomBooking.Api.Controllers
 
 		// PATCH: api/Bookings/5/status
 		[HttpPatch("{id}/status")]
+		[Authorize(Policy = "AdminOnly")]
 		public async Task<IActionResult> UpdateBookingStatus(int id, UpdateBookingStatusDto statusDto)
 		{
 			if (!ModelState.IsValid)
@@ -287,6 +293,7 @@ namespace RoomBooking.Api.Controllers
 
 		// DELETE: api/Bookings/5
 		[HttpDelete("{id}")]
+		[Authorize(Policy = "AdminOnly")]
 		public async Task<IActionResult> DeleteBooking(int id)
 		{
 			var booking = await _context.Bookings.FindAsync(id);
